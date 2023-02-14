@@ -1,16 +1,13 @@
 import axios from 'axios';
 import * as ImagePicker from 'expo-image-picker';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import AndBtn from './components/buttons/AndBtn';
 import IosBtn from './components/buttons/IosBtn';
 import Layout from './components/Layout';
 
-
-
-
-
 export default function App() {
+
   const pickImg = async () => {
     let res = await ImagePicker.requestMediaLibraryPermissionsAsync()
     if (res.status !== "granted") {
@@ -33,7 +30,7 @@ export default function App() {
     console.log('welcome from formDATA', selectedImg);
     if (selectedImg != '') {
       const form = new FormData()
-      form.append("file", {
+      form.append('photo', {
         name: new Date().toString() + " _image",
         uri: selectedImg,
         type: "image/jpg "
@@ -49,7 +46,7 @@ export default function App() {
           alert("great")
         }
       }).catch((err) => {
-        alert("oops"+ JSON.stringify(err) )
+        alert("oops" + JSON.stringify(err))
       })
     }
 
@@ -58,25 +55,21 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <IosBtn></IosBtn>
-      <Layout></Layout>
-      <AndBtn selected={pickImg}></AndBtn>
 
-    </View>
+        <SafeAreaView style={styles.container}>
+          {Platform.OS==='android'? <AndBtn selected={pickImg}></AndBtn> :  <IosBtn></IosBtn>}
+      <Layout></Layout>
+    </SafeAreaView>
+
 
   )
-
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: Platform.OS == 'android'? StatusBar.currentHeight: 0 
   },
 })
 

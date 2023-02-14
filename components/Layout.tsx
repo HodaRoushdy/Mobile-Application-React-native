@@ -13,6 +13,7 @@ const Layout = ()=>{
     const [images , setImages]=useState<imgUrl[]>([])
     useEffect(()=>{
         axios.get('http://localhost:3000/photos').then((res)=>{
+            console.log(res.data)
             setImages(res.data)
         }).catch((err)=>{
             console.log('error',err)

@@ -25,7 +25,7 @@ const style = StyleSheet.create({
         alignSelf:'center',
         lineHeight:22,
         paddingHorizontal:6,
-        marginHorizontal:5,
+        marginHorizontal:3,
         borderWidth:1,
         borderRadius:50,
         borderColor:'#4da6ff',
