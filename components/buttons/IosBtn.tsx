@@ -1,8 +1,10 @@
 import { Pressable, StyleSheet, Text, View } from "react-native"
-
-const IosBtn =()=>{
+interface Props {
+    selected: Function
+}
+const IosBtn =({ selected }: Props) =>{
     return(
-        <Pressable style={style.forAll}>
+        <Pressable onPress={() => { selected() }}  style={style.forAll}>
             <View style={{flexDirection:'row', justifyContent:'center' }}>
     <Text style={style.forPls}>+</Text>
     </View>
